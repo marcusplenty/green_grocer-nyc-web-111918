@@ -17,18 +17,17 @@ def consolidate_cart(cart)
 end
 
 def apply_coupons(cart, coupon)
-  key = coupon[0][:item]
-  decrement = coupon[0][:num]
-  old_count = cart[0][key][:count]
+  key = coupon[:item]
+  decrement = coupon[:num]
+  old_count = cart[key][:count]
   new_count = old_count-decrement
   new_key = key + " W/COUPON"
-  new_price = coupon[0][:cost]
+  new_price = coupon[:cost]
   if new_count >= 0
-    cart[0][key][:count] = new_count
-    cart[0][new_key] ={:price => new_price, :clearance => true, :count => 1}
+    cart[key][:count] = new_count
+    cart[new_key] ={:price => new_price, :clearance => true, :count => 1}
   end
   return cart
-
 end
 
 def apply_clearance(cart)
